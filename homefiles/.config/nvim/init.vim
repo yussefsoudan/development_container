@@ -126,7 +126,7 @@ let g:coc_global_extensions = [
 " Suggestions colouring (ref: https://vi.stackexchange.com/questions/12664/is-there-any-way-to-change-the-popup-menu-color)
  :highlight PmenuSel ctermbg=gray guibg=gray
 
- " Show docs of function/class
+" Show docs of function/class
 nnoremap <silent> K :call ShowDocumentation()<CR>
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
