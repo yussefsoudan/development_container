@@ -1,0 +1,29 @@
+{
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "/usr/local/bin/black",
+  "clangd.arguments": ["--resource-dir=/usr/lib/llvm-12/lib/clang/12.0.0"],
+  "coc.preferences.jumpCommand": "tabe",
+  "git.addGBlameToVirtualText": true,
+  "clangd.fallbackFlags": [
+    "-std=c++17",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-isystem",
+    "/usr/include",
+    "-I."
+  ],
+  "clangd.semanticHighlighting": true,
+  "explorer.git.enable": true,
+  "explorer.icon.enableNerdfont": true,
+  "coc.github.enable": true,
+  "codeLens.enable": true,
+  "coc.preferences.enableFloatHighlight": true,
+  "cmake.cmakePath": "/usr/bin/cmake",
+  "http.proxyStrictSSL": false,
+  "yaml.format.enable": true,
+  "yaml.completion": true,
+  "yaml.hover": true,
+  "yaml.validate": true,
+  "coc.preferences.formatOnSaveFiletypes": ["cmake", "cpp", "json", "python"]
+}
