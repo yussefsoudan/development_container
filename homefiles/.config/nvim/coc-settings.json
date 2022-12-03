@@ -6,24 +6,21 @@
   "git.addGBlameToVirtualText": true,
   "clangd.fallbackFlags": [
     "-std=c++17",
-    "-Wall",
-    "-Wextra",
-    "-Wpedantic",
-    "-isystem",
-    "/usr/include",
-    "-I."
+    "-Weverything", // enable all diagnostics 
+    "-isystem", // adds a directory to system include search path
+    "/usr/include"
   ],
   "clangd.semanticHighlighting": true,
-  "explorer.git.enable": true,
-  "explorer.icon.enableNerdfont": true,
   "coc.github.enable": true,
-  "codeLens.enable": true,
   "coc.preferences.enableFloatHighlight": true,
+  "coc.preferences.formatOnSaveFiletypes": ["cmake", "cpp", "json", "python"]
   "cmake.cmakePath": "/usr/bin/cmake",
   "http.proxyStrictSSL": false,
+  "codeLens.enable": true,
   "yaml.format.enable": true,
   "yaml.completion": true,
   "yaml.hover": true,
   "yaml.validate": true,
-  "coc.preferences.formatOnSaveFiletypes": ["cmake", "cpp", "json", "python"]
+  "explorer.git.enable": true,
+  "explorer.icon.enableNerdfont": true,
 }
