@@ -9,7 +9,7 @@ export ZSH=$HOME/.oh-my-zsh
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="agnoster"
-plugins=(git colorize extract colored-man-pages cp tmux zsh-autosuggestions zsh-completions zsh-syntax-highlighting)
+plugins=(zsh-autosuggestions zsh-completions zsh-syntax-highlighting colorize colored-man-pages tmux git extract cp)
 
 alias gotowork='cd /root/workspace'
 
