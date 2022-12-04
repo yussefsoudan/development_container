@@ -1,4 +1,4 @@
-FROM ubuntu:20.04 as base
+FROM ubuntu:20.04 
 
 ARG PYTHON=python3.9 
 
