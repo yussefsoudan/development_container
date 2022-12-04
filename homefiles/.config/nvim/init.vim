@@ -173,13 +173,13 @@ noremap t0 1gt
 noremap t9 :tablast<CR>
 
 " FZF 
-nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>s :Files<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 let $FZF_DEFAULT_COMMAND = "fdfind --exclude={.git,target,node_modules,build,tmp} --type f"
 au FileType fzf tunmap <Esc>
 
 " Silver Searcher 
-nnoremap <silent> <leader>F :Ag!<CR>
+nnoremap <silent> <leader>S :Ag!<CR>
 
 "" Recovery commands from history through FZF
 nmap <leader>y :History:<CR>
