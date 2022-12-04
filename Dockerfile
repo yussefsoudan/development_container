@@ -102,9 +102,9 @@ RUN nvim +CocUpdateSync +qall
 
 
 # Tmux 
-RUN git clone https://github.com/gpakosz/.tmux.git /path/to/oh-my-tmux && \ 
-    ln -s -f /path/to/oh-my-tmux/.tmux.conf ~/.tmux.conf && \ 
-    cp /path/to/oh-my-tmux/.tmux.conf.local ~/.tmux.conf.local
+RUN git clone https://github.com/gpakosz/.tmux.git /root/oh-my-tmux && \ 
+    ln -s -f /root/oh-my-tmux/.tmux.conf ~/.tmux.conf && \ 
+    cp /root/oh-my-tmux/.tmux.conf.local ~/.tmux.conf.local
 
 # Allow clangd to be accessible to neovim 
 RUN cp -a /usr/lib/llvm-12/bin/. /usr/bin/
