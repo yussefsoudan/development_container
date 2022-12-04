@@ -1,7 +1,7 @@
-# Personal Development Container
+# Personal Development Container :hammer:
 A development container for C++ and Python3 development using neovim as an editor and tmux as a terminal multiplexer.
 
-## Installation & Usage
+## Installation & Usage :rocket:
 It's best to alias the following commands if you'll work with the container daily. 
 
 1. First, build the image. This will take some time. 
@@ -28,7 +28,7 @@ docker exec -ti dev_container /opt/bb/bin/zsh
 docker-compose down
 ```
 
-## Choosing a Font 
+## Choosing a Font :art:
 This will make things a lot prettier when using neovim (enabling folder icons in Nerdtree, etc.) and zsh (enabling a pretty status line). 
 Note that this is independent of the Docker container.
 
@@ -39,7 +39,7 @@ After installing the font, you can go to your Windows Terminal application's set
 ### With MacOS Terminal 
 In your terminal, you can install fonts using homebrew, like [instructed here](https://github.com/ryanoasis/nerd-fonts#option-4-homebrew-fonts) and pick the colour your installed in Preferences. 
 
-## Tips for Developing in C++
+## Tips for Developing in C++ :safety_vest:
 ### Autocompletion and Errors
 In this setup, I use [coc.nvim](https://github.com/neoclide/coc.nvim) and its [coc-clangd](https://github.com/clangd/coc-clangd) extention to aid with development. 
 For CoC to process your project's includes though, remember to take the following steps:
@@ -53,7 +53,7 @@ This is particurarly what I do to follow my org's particular formatting.
 
 You can turn off autoformatting for `cpp` files by removing `cpp` from [here](https://bbgithub.dev.bloomberg.com/ysoudan1/development_container/blob/accf8071a3ab923a5a44f624b5cb1d7a477ea706/homefiles/.config/nvim/coc-settings.json#L16). 
 
-## Tips for Developing in Python
+## Tips for Developing in Python :safety_vest:
 ### Autocompletion and Errors
 Things are good to go for Python out of the box thanks to `coc-pyright` and `coc-jedi`. 
 
@@ -61,7 +61,7 @@ Things are good to go for Python out of the box thanks to `coc-pyright` and `coc
 For formatting, `black` is used and it auto-formats when you save. Note that `black` does not support selection formatting. 
 You can turn off autoformatting for `python` files by removing `python` from [here](https://bbgithub.dev.bloomberg.com/ysoudan1/development_container/blob/accf8071a3ab923a5a44f624b5cb1d7a477ea706/homefiles/.config/nvim/coc-settings.json#L16). 
 
-## Customizing
+## Customizing :pencil2:
 Feel free to fork this repository to change the dependencies in the `Dockerfile` or the access to your various folders in `docker-compose.yaml`. 
 
 
