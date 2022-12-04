@@ -71,12 +71,14 @@ RUN echo "StrictHostKeyChecking no" >> /root/.ssh/config
 RUN chmod 600 /root/.ssh/config
 
 # Neovim 
+
 ## Get latest Nodejs v14+
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
     apt-get update && \ 
     apt-get clean && \ 
     apt-get autoremove && \ 
     apt-get install -y nodejs 
+
 ## Get newer version of neovim
 RUN apt-get update && \
     apt-get clean && \ 
@@ -84,30 +86,20 @@ RUN apt-get update && \
     add-apt-repository ppa:neovim-ppa/stable && \
     apt-get update && \
     apt-get install -y neovim
+
 ## Setup neovim and coc extensions
-RUN sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 RUN mkdir -p ~/.config/nvim
 RUN mkdir -p ~/.cache/nvim/backups/
+RUN mkdir -p ~/.config/coc/extensions/
 COPY ./homefiles/.config/nvim/init.vim /root/.config/nvim/init.vim
 COPY ./homefiles/.config/nvim/coc-settings.json /root/.config/nvim/coc-settings.json
-RUN nvim --headless -n -i NONE +PlugInstall +qall && \ 
-    mkdir -p ~/.config/coc/extensions && \ 
-    [ ! -f package.json ] && echo '{"dependencies":{}}'> ~/.config/coc/extensions/package.json; \
-    npm install -C ~/.config/coc/extensions --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod coc-snippets && \
-    npm install -C ~/.config/coc/extensions --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod coc-pyright && \
-    npm install -C ~/.config/coc/extensions --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod coc-jedi && \
-    npm install -C ~/.config/coc/extensions --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod coc-clang-format-style-options && \
-    npm install -C ~/.config/coc/extensions --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod coc-clangd && \
-    npm install -C ~/.config/coc/extensions --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod coc-json && \
-    npm install -C ~/.config/coc/extensions --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod coc-yaml && \
-    npm install -C ~/.config/coc/extensions --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod coc-xml && \
-    npm install -C ~/.config/coc/extensions --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod coc-toml && \
-    npm install -C ~/.config/coc/extensions --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod coc-docker && \
-    npm install -C ~/.config/coc/extensions --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod coc-pairs && \
-    npm install -C ~/.config/coc/extensions --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod coc-cmake && \
-    npm install -C ~/.config/coc/extensions --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod coc-markdownlint && \
-    npm install -C ~/.config/coc/extensions --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod coc-sh      
+
+RUN sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+RUN nvim --headless -n -i NONE +PlugInstall +qall 
+RUN nvim +'CocInstall -sync coc-json coc-clang-format-style-options coc-clangd coc-pyright coc-yaml coc-xml coc-pairs coc-sh coc-cmake coc-jedi' +qall 
+RUN nvim +CocUpdateSync +qall
+
 
 # Tmux 
 RUN git clone https://github.com/gpakosz/.tmux.git /path/to/oh-my-tmux && \ 

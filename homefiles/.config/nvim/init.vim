@@ -117,6 +117,11 @@ let g:coc_global_extensions = [
      \'coc-clang-format-style-options',
      \'coc-clangd',
      \'coc-json',
+     \'coc-pyright',
+     \'coc-yaml',
+     \'coc-xml',
+     \'coc-pairs',
+     \'coc-sh',
      \'coc-cmake',
      \'coc-jedi']
 
