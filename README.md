@@ -49,7 +49,6 @@ For CoC to process your project's includes though, remember to take the followin
 ### Formatting 
 Formatting should be taken care of by `clangd`; you should see the file auto-formatting when you save and you can format selected regions using `<leader>f`. 
 Note, however, that if you place a custom `.clang-format` in an outer directory to your project's that it will then take precedence. 
-This is particurarly what I do to follow my org's particular formatting. 
 
 You can turn off autoformatting for `cpp` files by removing `cpp` from [here](https://bbgithub.dev.bloomberg.com/ysoudan1/development_container/blob/accf8071a3ab923a5a44f624b5cb1d7a477ea706/homefiles/.config/nvim/coc-settings.json#L16). 
 
