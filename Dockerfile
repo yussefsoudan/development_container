@@ -54,8 +54,7 @@ ENV SHELL=/usr/bin/zsh
 
 # Python 
 RUN python3 -m pip install --user jedi-language-server 
-RUN python3 -m pip install setuptools pynvim pytest black pylint 
-RUN python3 -m pip install poetry black cmake-format pylint mypy nox
+RUN python3 -m pip install setuptools pynvim pytest black pylint poetry black cmake-format pylint mypy nox "dask[complete]" numpy pandas
 
 # Setup bbgihub keys 
 # When you rebuild the image, add contents of github.pub to a github key 
