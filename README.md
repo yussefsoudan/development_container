@@ -64,6 +64,11 @@ For formatting, `black` is used and it auto-formats when you save. Note that `bl
 You can turn off autoformatting for `python` files by removing `python` from [here](https://bbgithub.dev.bloomberg.com/ysoudan1/development_container/blob/accf8071a3ab923a5a44f624b5cb1d7a477ea706/homefiles/.config/nvim/coc-settings.json#L16). 
 
 ## Customizing :pencil2:
-Feel free to fork this repository to change the dependencies in the `Dockerfile` or the access to your various folders in `docker-compose.yaml`. 
+Feel free to fork this repository and change the setup suit your needs. 
+
+Things you might want to customise may include:
+- Changing the installed packages in the `Dockerfile`. 
+- Changing what files or directories are mounted in the `docker-compose.yaml`. 
+- Customising your neovim setup in `init.vim`. 
 
 
