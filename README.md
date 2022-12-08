@@ -40,7 +40,7 @@ First, [choose a font](https://github.com/ryanoasis/nerd-fonts#patched-fonts) an
 After installing the font, you can go to your Windows Terminal application's settings, choose Ubuntu from the left, then Appearance and then change Font Face to your installed font. 
 
 ### With MacOS Terminal 
-In your terminal, you can install fonts using homebrew, like [instructed here](https://github.com/ryanoasis/nerd-fonts#option-4-homebrew-fonts) and pick the colour your installed in Preferences. 
+In your terminal, you can install fonts using homebrew, like [instructed here](https://github.com/ryanoasis/nerd-fonts#option-4-homebrew-fonts) and you can choose your installed font in Preferences --> Profiles. 
 
 ## Tips for Developing in C++ :safety_vest:
 ### Autocompletion and Errors
