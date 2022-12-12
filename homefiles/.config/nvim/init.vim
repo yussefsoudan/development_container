@@ -175,7 +175,6 @@ noremap t9 :tablast<CR>
 " FZF 
 nnoremap <silent> <leader>s :Files<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
-let $FZF_DEFAULT_COMMAND = "fdfind --exclude={.git,target,node_modules,build,tmp} --type f"
 au FileType fzf tunmap <Esc>
 
 " Silver Searcher 
