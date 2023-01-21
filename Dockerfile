@@ -19,6 +19,7 @@ RUN apt update && \
     tmux \ 
     less \ 
     gcc \ 
+    lua5.3 \
     curl \ 
     make \ 
     wget \ 
@@ -90,12 +91,15 @@ RUN apt-get update && \
 RUN mkdir -p ~/.config/nvim
 RUN mkdir -p ~/.cache/nvim/backups/
 RUN mkdir -p ~/.config/coc/extensions/
-COPY ./homefiles/.config/nvim/init.vim /root/.config/nvim/init.vim
+COPY ./homefiles/.config/nvim/init.lua /root/.config/nvim/init.lua
+COPY ./homefiles/.config/nvim/lua /root/.config/nvim/lua
 COPY ./homefiles/.config/nvim/coc-settings.json /root/.config/nvim/coc-settings.json
 
-RUN sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-RUN nvim --headless -n -i NONE +PlugInstall +qall 
+## Install packer.nvim for installing plugins
+RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerInstall' 
+RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' 
 RUN nvim +'CocInstall -sync coc-json coc-clang-format-style-options coc-clangd coc-pyright coc-yaml coc-xml coc-pairs coc-sh coc-cmake coc-jedi' +qall 
 RUN nvim +CocUpdateSync +qall
 

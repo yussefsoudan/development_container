@@ -8,8 +8,8 @@ services:
     tty: true 
     volumes: 
       - ./workspace:/root/workspace 
-      - ./homefiles/.config/nvim/init.vim:/root/.config/nvim/init.vim
+      - ./homefiles/.config/nvim/init.lua:/root/.config/nvim/init.lua
       - ./homefiles/.config/nvim/coc-settings.json:/root/.config/nvim/coc-settings.json
-      - ./homefiles/.config/nvim/plugged/:/root/.config/nvim/plugged/ 
+      - ./homefiles/.config/nvim/lua/:/root/.config/nvim/lua/ 
       - ./homefiles/.zshrc:/root/.zshrc  
       - ./homefiles/.gitconfig:/root/.gitconfig
