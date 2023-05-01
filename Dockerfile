@@ -53,6 +53,9 @@ RUN sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 
 ENV SHELL=/usr/bin/zsh
 
+# Rust 
+RUN curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+
 # Python 
 RUN python3 -m pip install --user jedi-language-server 
 RUN python3 -m pip install setuptools pynvim pytest black pylint poetry black cmake-format pylint mypy nox "dask[complete]" numpy pandas
