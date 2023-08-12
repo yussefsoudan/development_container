@@ -1,6 +1,6 @@
 FROM ubuntu:20.04 
 
-ARG PYTHON=python3.9 
+ARG PYTHON=python3.10 
 
 ENV PYTHON="$PYTHON" \ 
     TERM=xterm-256color \ 
@@ -13,9 +13,9 @@ ENV PYTHON="$PYTHON" \
 RUN apt update && \ 
     apt  install -y  \ 
     git  \ 
-    python3.9 \
-    python3-pip \ 
-    python3.9-venv \
+    ${PYTHON} \
+    ${PYTHON}-pip \ 
+    ${PYTHON}-venv \
     tmux \ 
     less \ 
     gcc \ 
@@ -106,12 +106,6 @@ RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerInstall'
 RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' 
 RUN nvim +'CocInstall -sync coc-json coc-clang-format-style-options coc-clangd coc-pyright coc-yaml coc-xml coc-pairs coc-sh coc-cmake coc-jedi' +qall 
 RUN nvim +CocUpdateSync +qall
-
-
-# Tmux 
-RUN git clone https://github.com/gpakosz/.tmux.git /root/oh-my-tmux && \ 
-    ln -s -f /root/oh-my-tmux/.tmux.conf ~/.tmux.conf && \ 
-    cp /root/oh-my-tmux/.tmux.conf.local ~/.tmux.conf.local
 
 # Allow clangd to be accessible to neovim 
 RUN cp -a /usr/lib/llvm-12/bin/. /usr/bin/
