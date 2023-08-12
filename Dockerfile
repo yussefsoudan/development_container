@@ -14,7 +14,7 @@ RUN apt update && \
     apt  install -y  \ 
     git  \ 
     ${PYTHON} \
-    ${PYTHON}-pip \ 
+    python3-pip \ 
     ${PYTHON}-venv \
     tmux \ 
     less \ 
