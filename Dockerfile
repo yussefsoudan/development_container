@@ -1,6 +1,6 @@
 FROM ubuntu:20.04 
 
-ARG PYTHON=python3.10 
+ARG PYTHON=python3.9 
 
 ENV PYTHON="$PYTHON" \ 
     TERM=xterm-256color \ 
