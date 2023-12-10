@@ -1,6 +1,6 @@
-FROM ubuntu:20.04 
+FROM ubuntu:22.04 
 
-ARG PYTHON=python3.9 
+ARG PYTHON=python3.10
 
 ENV PYTHON="$PYTHON" \ 
     TERM=xterm-256color \ 
@@ -10,46 +10,19 @@ ENV PYTHON="$PYTHON" \
     LANGUAGE=en_US:en 
 
 # Development Tools 
-RUN apt update && \ 
-    apt  install -y  \ 
-    git  \ 
-    ${PYTHON} \
-    python3-pip \ 
-    ${PYTHON}-venv \
-    tmux \ 
-    less \ 
-    gcc \ 
-    lua5.3 \
-    curl \ 
-    make \ 
-    wget \ 
-    zsh powerline fonts-powerline language-pack-en \ 
-    python3-neovim \
-    gdb \
-    cmake \ 
-    clangd-12 \
-    clang \
-    g++ \ 
-    rsync \
-    silversearcher-ag \
-    zip \ 
-    openssh-server \
-    libstdc++-10-dev \
-    libtool \
-    npm \
-    pkg-config \
-    libgtest-dev \ 
-    glibc-source \
-    && update-locale \
-    && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean
+RUN apt-get update 
+RUN apt-get install -y git tmux less curl wget zsh openssh-server zip unzip ripgrep
+RUN apt-get install -y ${PYTHON} ${PYTHON}-venv python3-pip
+RUN apt-get install -y lua5.3
+RUN apt-get install -y npm nodejs
+RUN apt-get install -y gcc-12 make cmake gdb clangd-15 clang g++ libstdc++-12-dev libtool pkg-config gettext ninja-build
+RUN apt-get clean
 
 # oh-my-zsh
 RUN sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" && \
     git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions && \
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
     git clone --depth=1 --single-branch https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions 
-
 
 ENV SHELL=/usr/bin/zsh
 
@@ -58,8 +31,8 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --defau
 RUN export PATH="$HOME/.cargo/bin:$PATH"
 
 # Python 
-RUN python3 -m pip install --user jedi-language-server 
-RUN python3 -m pip install setuptools pynvim pytest black pylint poetry black cmake-format pylint mypy nox "dask[complete]" numpy pandas
+RUN ${PYTHON} -m pip install --user jedi-language-server 
+RUN ${PYTHON} -m pip install pytest black poetry 
 
 # Setup gihub keys 
 # When you rebuild the image, add contents of github.pub to a github key 
@@ -76,39 +49,19 @@ RUN chmod 600 /root/.ssh/config
 
 # Neovim 
 
-## Get latest Nodejs v14+
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
-    apt-get update && \ 
-    apt-get clean && \ 
-    apt-get autoremove && \ 
-    apt-get install -y nodejs 
+## Setup latest neovim 
+RUN git clone --depth 1 https://github.com/neovim/neovim /root/neovim
+RUN cd /root/neovim && make CMAKE_BUILD_TYPE=Release
+RUN cd /root/neovim && make install
 
-## Get newer version of neovim
-RUN apt-get update && \
-    apt-get clean && \ 
-    apt-get install -y software-properties-common && \
-    add-apt-repository ppa:neovim-ppa/stable && \
-    apt-get update && \
-    apt-get install -y neovim
+COPY ./homefiles/.config/ /root/.config/
 
-## Setup neovim and coc extensions
-RUN mkdir -p ~/.config/nvim
-RUN mkdir -p ~/.cache/nvim/backups/
-RUN mkdir -p ~/.config/coc/extensions/
-COPY ./homefiles/.config/nvim/init.lua /root/.config/nvim/init.lua
-COPY ./homefiles/.config/nvim/lua /root/.config/nvim/lua
-COPY ./homefiles/.config/nvim/coc-settings.json /root/.config/nvim/coc-settings.json
-
-## Install packer.nvim for installing plugins
+## Install packer and needed plugins
 RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerInstall' 
-RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' 
-RUN nvim +'CocInstall -sync coc-json coc-clang-format-style-options coc-clangd coc-pyright coc-yaml coc-xml coc-pairs coc-sh coc-cmake coc-jedi' +qall 
-RUN nvim +CocUpdateSync +qall
+RUN nvim --headless ':MasonInstallAll' +q
 
 # Allow clangd to be accessible to neovim 
-RUN cp -a /usr/lib/llvm-12/bin/. /usr/bin/
+RUN cp -a /usr/lib/llvm-15/bin/. /usr/bin/
 
 CMD ["/usr/bin/zsh"]
-
