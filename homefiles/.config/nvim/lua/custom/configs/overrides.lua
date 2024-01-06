@@ -15,6 +15,7 @@ M.treesitter = {
     --   "python"
     -- },
   },
+
   highlight = {
     enable = true,
     use_languagetree = true,
@@ -23,8 +24,11 @@ M.treesitter = {
 
 M.mason = {
   ensure_installed = {
-    "lua-language-server",
+    "black",
+    "clang-format",
     "pyright",
+    "mypy",
+    "ruff",
   },
 }
 
