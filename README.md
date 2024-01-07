@@ -33,7 +33,7 @@ docker-compose down
 **Note**: when you build the image for the first time, or when you rebuild it, remember to copy the contents of `~/.ssh/github.pub` to a new SSH key in your Github account (Settings -> SSH and GPG Keys --> New SSH Key). This will enable SSH-based pulls and pushes to Github.  
 
 ## Choosing a Font :art:
-This will make things a lot prettier when using neovim (enabling folder icons in Nerdtree, etc.) and zsh (enabling a pretty status line). 
+This will make things a lot prettier when using neovim (enabling folder icons in Nerdtree or Nvimtree, etc.) and zsh (enabling a pretty status line). 
 Note that this is independent of the Docker container.
 
 ### With Windows Terminal
