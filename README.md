@@ -4,7 +4,7 @@ The `neovim` setup is built on [NvChad](https://github.com/NvChad/NvChad) with a
 
 ## Installation & Usage :rocket:
 It's best to alias the following commands if you'll work with the container daily. 
-Remember to change references to my own email and name to yours [here](https://github.com/yussefsoudan/development_container/blob/16b3df9021181e4b90b16dfaada4bba1c0019b74/Dockerfile#L41) and [here](https://github.com/yussefsoudan/development_container/blob/16b3df9021181e4b90b16dfaada4bba1c0019b74/homefiles/.gitconfig#L3). 
+Remember to change references to my own email and name to yours [here](https://github.com/yussefsoudan/development_container/blob/main/Dockerfile#L41) and [here](https://github.com/yussefsoudan/development_container/blob/main/homefiles/.gitconfig#L3). 
 
 1. First, build the image. This will take some time. 
 
